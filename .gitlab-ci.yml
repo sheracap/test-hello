@@ -1,0 +1,26 @@
+stages:
+  - build
+  - deploy
+
+variables:
+  TAG: registry.digitalocean.com/roboreggistry/front:latest
+  TOKEN: dop_v1_bf895121a0ef640404d5e1026a24403697d99ad2ff872cb3c8297e85856e55c0
+
+build:
+  stage: build
+  image: docker
+  services: 
+    - docker:dind 
+  before_script:
+    - docker login registry.digitalocean.com -u $TOKEN -p $TOKEN
+  script:
+    - docker build -t $TAG .
+    - docker push $TAG
+
+deploy:
+  stage: deploy
+  image: dtzar/helm-kubectl
+  before_script:
+    - kubectl --kubeconfig=devops/k8s-config.yaml get nodes
+  script:
+    - helm upgrade -i --namespace ingress-nginx --recreate-pods --kubeconfig devops/k8s-config.yaml -f devops/front/front.yaml front devops/front/
