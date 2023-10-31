@@ -18,15 +18,15 @@ export default defineConfig({
     port: 5173, // you can replace this port with any port
   },
   resolve: {
-    // alias: {
-    //   "@": resolve(__dirname, "src"),
-    //   "@core": resolve(__dirname, "src/core"),
-    //   "@stores": resolve(__dirname, "src/stores"),
-    //   "@ui": resolve(__dirname, "src/shared/ui"),
-    //   "@customTypes": resolve(__dirname, "src/shared/customTypes"),
-    //   "@utils": resolve(__dirname, "src/shared/utils"),
-    //   "@assets": resolve(__dirname, "src/assets")
-    // },
+    alias: {
+      "@": resolve(__dirname, "src"),
+      "@core": resolve(__dirname, "src/core"),
+      "@stores": resolve(__dirname, "src/stores"),
+      "@ui": resolve(__dirname, "src/shared/ui"),
+      "@customTypes": resolve(__dirname, "src/shared/customTypes"),
+      "@utils": resolve(__dirname, "src/shared/utils"),
+      "@assets": resolve(__dirname, "src/assets")
+    },
   },
   css: {
     preprocessorOptions: {
